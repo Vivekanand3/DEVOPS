@@ -1,0 +1,23 @@
+FROM amazonlinux:2
+
+MAINTAINER = "Vivek"
+
+#Install cowsay and Fortune
+RUN yum update -y  && \
+    yum install -y  cowsay fortune netcat && \
+    yum clean all
+
+#copy the script file 
+COPY wisecow.sh /usr/local/bin/wisecow.sh
+
+# Make the script executable
+RUN chmod +x /usr/local/bin/wisecow.sh
+
+#Expose port 4499
+EXPOSE 4499
+
+
+CMD ["/usr/local/bin/wisecow.sh"]
+docker build -t wisdom-server .   >>> docker build 
+
+docker run -p 4499:4499 wisdom-server >> docker run
